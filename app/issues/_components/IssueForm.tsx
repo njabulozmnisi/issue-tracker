@@ -1,6 +1,5 @@
 'use client';
 
-// import SimpleMDE from "react-simplemde-editor";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import {Controller, useForm} from "react-hook-form";
@@ -38,10 +37,10 @@ const IssueForm = ({issue}: { issue?: Issue }) => {
             else
                 await axios.post("/api/issues", data);
             router.push("/issues");
-
+            router.refresh();
         } catch (error) {
             setSubmitting(false);
-            setError('An unexpected error occurred.');
+            setError('An unexpected error occurred.' + error);
         }
     })
 
