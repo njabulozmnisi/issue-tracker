@@ -8,12 +8,12 @@ import {Issue, Status} from "@prisma/client";
 import {ArrowUpIcon} from "@radix-ui/react-icons";
 
 interface Props {
-    searchParams: { status: Status, orderBy: keyof Issue};
+    searchParams: { status: Status, orderBy: keyof Issue };
 }
 
 const IssuesPage = async ({searchParams}: Props) => {
 
-    const columns: { label: string, value: keyof Issue, classNames?: string}[] = [
+    const columns: { label: string, value: keyof Issue, classNames?: string }[] = [
         {label: "Issue", value: 'title'},
         {label: "Status", value: 'status', classNames: "hidden md:table-cell"},
         {label: "Created", value: 'createdAt', classNames: "hidden md:table-cell"},
@@ -22,10 +22,14 @@ const IssuesPage = async ({searchParams}: Props) => {
     const statuses = Object.values(Status);
     const status = statuses.includes(searchParams.status) ? searchParams.status : undefined;
 
+    const orderBy = columns.map(c => c.value).includes(searchParams.orderBy) ?
+        {[searchParams.orderBy]: 'asc'} : undefined;
+
     const issues = await prisma.issue.findMany({
         where: {
             status
-        }
+        },
+        orderBy
     });
 
     return (
