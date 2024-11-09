@@ -1,4 +1,5 @@
 import IssueSummary from "@/app/IssueSummary";
+import IssueChart from "@/app/IssueChart";
 import prisma from "@/prisma/client";
 import {Status} from "@prisma/client";
 
@@ -14,6 +15,9 @@ export default async function HomePage({searchParams}: { searchParams: { page: s
     const summary = Object.assign({}, ...issues.map(i => ({[i.status]: i._count.status})));
 
     return (
-        <IssueSummary open={summary[Status.OPEN]} inProgress={summary[Status.IN_PROGRESS]} closed={summary[Status.CLOSED]}/>
+        <IssueChart
+            open={summary[Status.OPEN]}
+            closed={summary[Status.CLOSED]}
+            inProgress={summary[Status.IN_PROGRESS]}/>
     );
 }
