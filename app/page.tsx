@@ -1,5 +1,7 @@
 import IssueSummary from "@/app/IssueSummary";
 import IssueChart from "@/app/IssueChart";
+import LatestIssues from "@/app/LatestIssues";
+import {Grid, Flex} from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import {Status} from "@prisma/client";
 
@@ -15,9 +17,20 @@ export default async function HomePage({searchParams}: { searchParams: { page: s
     const summary = Object.assign({}, ...issues.map(i => ({[i.status]: i._count.status})));
 
     return (
-        <IssueChart
-            open={summary[Status.OPEN]}
-            closed={summary[Status.CLOSED]}
-            inProgress={summary[Status.IN_PROGRESS]}/>
+        <Grid columns={{initial: "1", md: "2"}} gap="5">
+            <Flex direction="column" gap="5">
+                <IssueSummary
+                    open={summary[Status.OPEN]}
+                    closed={summary[Status.CLOSED]}
+                    inProgress={summary[Status.IN_PROGRESS]}/>
+                <IssueChart
+                    open={summary[Status.OPEN]}
+                    closed={summary[Status.CLOSED]}
+                    inProgress={summary[Status.IN_PROGRESS]}/>
+            </Flex>
+            <LatestIssues />
+        </Grid>
+
+
     );
 }
