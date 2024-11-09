@@ -1,12 +1,13 @@
 import IssueSummary from "@/app/IssueSummary";
 import IssueChart from "@/app/IssueChart";
 import LatestIssues from "@/app/LatestIssues";
-import {Grid, Flex} from "@radix-ui/themes";
+import {Flex, Grid} from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import {Status} from "@prisma/client";
+import {Metadata} from "next";
 
 
-export default async function HomePage({searchParams}: { searchParams: { page: string } }) {
+export default async function HomePage() {
     const issues = await prisma.issue.groupBy({
         by: ['status'],
         _count: {
