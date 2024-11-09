@@ -1,6 +1,6 @@
 import React from 'react';
 import prisma from "@/prisma/client";
-import {Avatar, Flex, Table, Card, Heading} from '@radix-ui/themes';
+import {Avatar, Card, Flex, Heading, Table} from '@radix-ui/themes';
 import Link from "next/link";
 import {IssueStatusBadge} from "@/app/components";
 
@@ -9,12 +9,12 @@ const LatestIssues = async () => {
         orderBy: {createdAt: 'desc'},
         take: 5,
         include: {
-            assignedToUser: true
+            assignedToUser: true,
         }
     });
 
     return (
-        <Card >
+        <Card>
             <Heading size="4" mb="5">Latest Issues</Heading>
             <Table.Root>
                 <Table.Body>
