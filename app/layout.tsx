@@ -8,7 +8,6 @@ import NavBar from "@/app/NavBar";
 import AuthProvider from "@/app/auth/provider";
 import QueryClientProvider from "@/app/QueryClientProvider";
 
-
 const inter = Inter({
     subsets: ["latin"],
     display: "swap",
