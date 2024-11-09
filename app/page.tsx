@@ -28,9 +28,14 @@ export default async function HomePage({searchParams}: { searchParams: { page: s
                     closed={summary[Status.CLOSED]}
                     inProgress={summary[Status.IN_PROGRESS]}/>
             </Flex>
-            <LatestIssues />
+            <LatestIssues/>
         </Grid>
 
 
     );
+}
+
+export const metadata: Metadata = {
+    title: "Issue Tracker - Dashboard",
+    description: "View a summary of project issues",
 }
